@@ -1,0 +1,23 @@
+{
+  "name": "guillermo",
+  "version": "1.0.0",
+  "description": "Iniciacion projecto hermana ojk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "root",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "gulp-express": "^0.3.5",
+    "gulp-install": "^0.6.0",
+    "gulp-pug": "^3.2.0",
+    "gulp-watch": "^4.3.11",
+    "gulp-watch-pug": "^1.0.0",
+    "pug": "^2.0.0-beta11"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
