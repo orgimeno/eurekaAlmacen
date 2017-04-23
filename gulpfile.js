@@ -4,8 +4,11 @@ var server = require('gulp-express');
 var pug = require('gulp-pug');
 var watch = require('gulp-watch');
 var gulp_watch_pug = require('gulp-watch-pug');
+var rename = require('gulp-rename')
+
+const pugPattern = 'client/**/*.pug';
  
-gulp.task('default',['serverUp', 'compilePugs'])
+gulp.task('default',['serverUp'])
 
 gulp.task('serverUp', function () {
     // Start the server at the beginning of the task 
@@ -20,15 +23,9 @@ gulp.task('serverUp', function () {
 });
 
 
-gulp.src('client/**/*.pug')
-    .pipe(watch('client/**/*.pug'))
-    .pipe(gulp_watch_pug('client/**/*.pug', { delay: 100 }))
+gulp.src(pugPattern)
+    .pipe(watch(pugPattern))
+    .pipe(gulp_watch_pug(pugPattern, { delay: 100 }))
     .pipe(pug())
-    .pipe(gulp.dest('client/html/'));
-
-gulp.task('compilePugs', function buildHTML() {
-  return gulp.src('client/views/*.pug')
-  .pipe(pug({
-    
-  }))
-});
+    .pipe(rename({dirname: ''}))
+    .pipe(gulp.dest('client/html/'))
