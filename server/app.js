@@ -14,5 +14,5 @@ app.get('/', function (req, res) {
 app.use('/api/v1', require("./routes/api/routes"))
 
 app.listen(3000, function () {
-  console.log('Escucha puerto 3000 again')
+  console.log('Linten port 3000 again')
 })
