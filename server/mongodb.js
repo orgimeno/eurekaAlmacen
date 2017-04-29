@@ -6,7 +6,7 @@ const configuration = {
 }
 const url = `mongodb://${configuration.host}:${configuration.port}/${configuration.database}`
 
-const MongoClient = require("mongodb").MongoClient
+const {MongoClient, ObjectID} = require("mongodb")
 
 const getInstance = (reject, func) => {
     MongoClient.connect(url, function(err, db) {
@@ -28,4 +28,4 @@ const getInstance = (reject, func) => {
     })
 }
 
-module.exports = {getInstance}
+module.exports = {getInstance, ObjectID}

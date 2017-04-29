@@ -8,32 +8,36 @@ const NonImplementedException = function(){
 product.get("/", function(req, res){
   repo.getAll().then(
     data => res.send(data), 
-    reason => res.status(500).send(reason)
+    reason => res.send(reason)
   )
 })
 
 product.get("/:id", function(req, res){
   repo.getOne(req.params.id).then(
     data => res.send(data), 
-    reason => res.status(500).send(reason)
+    reason => res.send(reason)
   )
 })
 
 product.post("/", function(req, res){
-  let {name, price, color, stock} = req.body // todo validate (name required, default stock is 0, etc.)
-
-  repo.create({name, price, color, stock}).then(
+  repo.create().then(
     data => res.send(data), 
-    reason => res.status(500).send(reason)
+    reason => res.send(reason)
   )
 })
 
 product.put("/:id", function(req, res){
-  throw new NonImplementedException().asString()
+  repo.update(req.params.id, req.body).then(
+    data => res.send(data),
+    reason => res.send(reason)
+  )
 })
 
 product.delete("/:id", function(req, res){
-  throw new NonImplementedException().asString()
+  repo.delete(req.params.id).then(
+    data => res.send(data),
+    reason => res.send(reason)
+  )
 })
 
 module.exports = product

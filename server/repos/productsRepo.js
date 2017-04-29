@@ -1,6 +1,6 @@
 const collectionName = "products"
 
-const getInstance = require("../mongodb").getInstance
+const {getInstance, ObjectID} = require("../mongodb")
 
 const productsRepo = {
     create: (obj) => {
@@ -17,6 +17,22 @@ const productsRepo = {
                     })      
                 })
             })
+    },
+
+    delete: (id) => {
+        return new Promise((resolve, reject) => {
+            getInstance(reject, (db) => {
+                db.collection(collectionName)
+                    .deleteOne({_id: new ObjectID(id)}, (err, result) => {
+                        if(err){
+                            reject(err)
+                            return
+                        }
+
+                        resolve({deleted: result.deletedCount > 0})
+                    })
+            })
+        })
     },
     
     getAll: () => {
@@ -42,7 +58,7 @@ const productsRepo = {
         return new Promise((resolve, reject) => {
             getInstance(reject, (db) => {
                 db.collection(collectionName)
-                    .findOne({_id: id}, (err, documents) => {
+                    .findOne({_id: new ObjectID(id)}, (err, documents) => {
                         if(err){
                             reject(err)
                             return
@@ -52,6 +68,22 @@ const productsRepo = {
                     })
 
                 db.close()
+            })
+        })
+    },
+
+    update: (id, data) => {
+        return new Promise((resolve, reject) => {
+            getInstance(reject, (db) => {
+                db.collection(collectionName)
+                    .updateOne({_id: new ObjectID(id)}, {$set: data}, (err, result) => {
+                        if(err){
+                            reject(err)
+                            return
+                        }
+
+                        resolve({updated: result.modifiedCount > 0})
+                    })
             })
         })
     }
