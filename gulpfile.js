@@ -8,7 +8,7 @@ var rename = require('gulp-rename')
 var typescript = require('gulp-typescript')
 
 const pugPattern = 'client/source/**/*.pug'
-const typescriptPattern = 'client/source/app/**/*.ts'
+const typescriptPattern = 'client/source/**/*.ts'
  
 gulp.task('default',['serverUp'])
 
@@ -33,6 +33,5 @@ gulp.src(pugPattern)
     .pipe(gulp.dest('client/built/html/'))
 
 gulp.src(typescriptPattern)
-    .pipe(watch(typescriptPattern))
     .pipe(typescript({}))
-    .pipe(gulp.dest('client/built/app/'))
+    .pipe(gulp.dest('client/built/'))

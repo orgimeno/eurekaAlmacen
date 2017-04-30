@@ -7,10 +7,11 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('js', express.static('../client/scripts'))
+app.use('/angular', express.static(__dirname + '/../node_modules/angular'))
+app.use('/app', express.static(__dirname + '/../client/built/app'))
 
 app.get('/', function (req, res) {
-  res.sendFile(path.resolve(__dirname + '/../client/html/index.html'))
+  res.sendFile(path.resolve(__dirname + '/../client/built/html/index.html'))
 })
 
 app.use('/api/v1', require("./routes/api/routes"))
