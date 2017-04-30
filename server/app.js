@@ -7,6 +7,8 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use('js', express.static('../client/scripts'))
+
 app.get('/', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/../client/html/index.html'))
 })
