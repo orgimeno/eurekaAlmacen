@@ -18,6 +18,12 @@ describe("Validation service", () => {
             .should.have.property('validate')
             .which.is.a.Function()
     })
+
+    it("has a validateEntity method", () => {
+        ValidationService
+            .should.have.property('validateEntity')
+            .which.is.a.Function()
+    })
 })
 
 describe("It's validate method", () => {
@@ -36,5 +42,23 @@ describe("It's validate method", () => {
         errors.should.have.size(2)
         should("foo").be.oneOf(errors)
         should("bar").be.oneOf(errors)
+    })
+})
+
+describe("It's validateEntity method", () => {
+    it("returns and object with the format errors found for each property of the given object", () => {
+        const schema = {
+            foo: [new DummyValidator("foo", false)],
+            bar: [new DummyValidator("bar", true)]
+        }
+
+        const result = ValidationService.validateEntity({}, schema)
+        
+        result
+            .should.have.property("foo")
+            .and.should.not.have.property("bar")
+
+        result.foo.should.have.size(1)
+        should("foo").be.oneOf(result.foo)
     })
 })

@@ -3,9 +3,9 @@ const ValidationService = require("../../../modules/validation/dist/validationSe
 const Required = require("../../../modules/validation/dist/validators/required")
 const repo = require("../../repos/productsRepo")
 
-const NonImplementedException = function(){
-  this.asString = () => this.constructor.name;
-}
+const schema = {
+    name: [new Required("Product name is required")]
+  }
 
 product.get("/", function(req, res){
   repo.getAll().then(
@@ -22,14 +22,10 @@ product.get("/:id", function(req, res){
 })
 
 product.post("/", function(req, res){
-  const {name} = req.body
+  const validation = ValidationService.validateEntity(req.body, schema)
 
-  const errors = ValidationService.validate(name, [
-    new Required("Product name is required")
-  ])
-
-  if(errors.length){
-    res.send(errors)
+  if(!validation.__success){
+    res.send(validation)
     return
   }
 
