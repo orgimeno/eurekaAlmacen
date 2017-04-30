@@ -8,6 +8,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/angular', express.static(__dirname + '/../node_modules/angular'))
+app.use('/angular-route', express.static(__dirname + '/../node_modules/angular-route'))
+app.use('/partials', express.static(__dirname + '/../client/built/html/partials'))
 app.use('/app', express.static(__dirname + '/../client/built/app'))
 
 app.get('/', function (req, res) {

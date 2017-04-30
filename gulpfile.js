@@ -29,7 +29,9 @@ gulp.src(pugPattern)
     .pipe(watch(pugPattern))
     .pipe(gulp_watch_pug(pugPattern, { delay: 100 }))
     .pipe(pug())
-    .pipe(rename({dirname: ''}))
+    .pipe(rename(function(path){
+        path.dirname = path.dirname.substring("views".length)
+    }))
     .pipe(gulp.dest('client/built/html/'))
 
 gulp.src(typescriptPattern)

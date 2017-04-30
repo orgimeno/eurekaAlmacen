@@ -3,7 +3,12 @@ html(lang='en')
   head
     meta(charset = 'utf-8')
     meta(name = 'author', content = 'lovmanes')
-    script(src = "/app/app.js")
+    // external dependencies
     script(src = "/angular/angular.js")
-  body
-    h1 Hola mundo sublime hola
+    script(src = "/angular-route/angular-route.js")
+    // internal dependencies
+    script(src = "/app/app.js")
+    script(src = "/app/productsController.js")
+    script(src = "/app/config.js")
+  body(ng-app="eureka")
+      ng-view
